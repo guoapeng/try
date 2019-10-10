@@ -1,3 +1,23 @@
+#Try
+
+A Go language implementation of try catch.
+
+description:
+golang version short message sender underline with ali sms service
+
+Prerequisite:
+install golang 1.12 or later
+
+## Installation
+Use `go get` to install SDK
+
+```sh
+$ go get -u github.com/guoapeng/try
+```
+
+examples
+
+```go
 package try_test
 
 import (
@@ -61,3 +81,4 @@ func ExampleHandleMultipleDatType() {
 	// b/c = 4
 }
 
+```
