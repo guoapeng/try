@@ -1,9 +1,9 @@
 #Try
 
-A Go language implementation of try catch.
+
 
 description:
-golang version short message sender underline with ali sms service
+A Go language implementation of try catch.
 
 Prerequisite:
 install golang 1.12 or later
