@@ -1,12 +1,10 @@
 #Try
 
-
-
 description:
 A Go language implementation of try catch.
 
 Prerequisite:
-install golang 1.12 or later
+install golang 1.13 or later
 
 ## Installation
 Use `go get` to install SDK
@@ -80,5 +78,49 @@ func ExampleHandleMultipleDatType() {
 	// Output:
 	// b/c = 4
 }
+
+
+func ExampleHowToReturnValue() {
+	r := divide(8, 4)
+	fmt.Println("8/4 =", r)
+	//Output:
+	// 8/4 = 2
+}
+
+func ExampleHowToThrowException() {
+	Try{func() {
+		r := divideThrowsRuntimeExption(8, 0)
+		fmt.Println("8/4 =", r)
+	}} .Catch(func(ex error) {
+		fmt.Println("error handled at point B:", ex)
+	}).Go()
+
+	//Output:
+	// error handled at point B: it can't be handle at point A - runtime error: integer divide by zero
+}
+
+func divideThrowsRuntimeExption(x, y int) (z int) {
+	Try{func(a, b int) {
+		z = a / b
+		return
+	}}.Catch(func(ex error) {
+		if err, ok := ex.(error); ok {
+			panic(fmt.Errorf("it can't be handle at point A - %s", err))
+		}
+		fmt.Println("error happens", ex)
+	}).Go(x, y)
+	return
+}
+
+func divide(x, y int) (z int) {
+	Try{func(a, b int) {
+		z = a / b
+		return
+	}}.Catch(func(ex error) {
+		fmt.Println("error happens", ex)
+	}).Go(x, y)
+	return
+}
+
 
 ```
