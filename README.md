@@ -23,6 +23,28 @@ import (
 	. "github.com/guoapeng/try"
 )
 
+//获得返回值
+func ExampleHowToReturnValue() {
+	r := divide(8, 4)
+	fmt.Println("8/4 =", r)
+	//Output:
+	// 8/4 = 2
+}
+
+// 异常处理
+func ExampleHowToThrowException() {
+	Try{func() {
+		r := divideThrowsRuntimeExption(8, 0)
+		fmt.Println("8/4 =", r)
+	}} .Catch(func(ex error) {
+		fmt.Println("error handled at point B:", ex)
+	}).Go()
+
+	//Output:
+	// error handled at point B: it can't be handle at point A - runtime error: integer divide by zero
+}
+
+
 func ExampleRuntimeError() {
 	Try{ func(a, b, c int) (int,error) {
 		return a/b, nil
@@ -79,26 +101,6 @@ func ExampleHandleMultipleDatType() {
 	// b/c = 4
 }
 
-
-func ExampleHowToReturnValue() {
-	r := divide(8, 4)
-	fmt.Println("8/4 =", r)
-	//Output:
-	// 8/4 = 2
-}
-
-func ExampleHowToThrowException() {
-	Try{func() {
-		r := divideThrowsRuntimeExption(8, 0)
-		fmt.Println("8/4 =", r)
-	}} .Catch(func(ex error) {
-		fmt.Println("error handled at point B:", ex)
-	}).Go()
-
-	//Output:
-	// error handled at point B: it can't be handle at point A - runtime error: integer divide by zero
-}
-
 func divideThrowsRuntimeExption(x, y int) (z int) {
 	Try{func(a, b int) {
 		z = a / b
@@ -121,6 +123,5 @@ func divide(x, y int) (z int) {
 	}).Go(x, y)
 	return
 }
-
 
 ```
